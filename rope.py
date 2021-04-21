@@ -29,7 +29,7 @@ class Rope:
   def total_size(self):
     leftText =  self.left.total_size() if self.left else  0
     rightText = self.right.total_size() if self.right else  0
-    return leftText + this.text.length + rightText
+    return leftText + len(this.text) + rightText
 
   # how deep the tree is (I.e. the maximum depth of children)
   def depth(self):
