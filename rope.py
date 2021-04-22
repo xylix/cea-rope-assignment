@@ -94,19 +94,19 @@ def append(rope, text):
 # (E.g. you can choose to mutate the input rope or not)
 def split_at(rope, position):
   # TODO
-  return [newLeft, right]
+  pass
 
 def delete_range(rope, start, end):
   # TODO
-  return rope
+  pass
 
 def insert(rope, text, location): 
   # TODO
-  return rope
+  pass
 
 def rebalance(rope):
   # TODO
-  return rope
+  pass
 
 '''
  Rotates a tree: used for rebalancing.
