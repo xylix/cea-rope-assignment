@@ -1,6 +1,6 @@
 class Rope:
   # Note: depending on your implementation, you may want to to change this constructor
-  def __init__(self, text, size):
+  def __init__(self, text, size = None):
     self.text = text
     self.size = size
     self.left = None
@@ -50,7 +50,7 @@ class Rope:
     return mapVersion
 
 def create_rope_from_map(map): 
-  rope = Rope(map['text'], map['size'])
+  rope = Rope(map.get('text'), map.get('size'))
   if 'left' in map: 
     rope.left = create_rope_from_map(map['left'])
   if 'right' in map: 
