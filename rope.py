@@ -5,19 +5,6 @@ class Rope:
     self.left = None
     self.right = None
 
-  # prints contents including showing the hierarchy
-  # it's not required for this function to work, it's just there to help with debugging
-  # 
-  # e.g. if the  root node has ABC, the left node has DEF, and the right node has GHI, 
-  # the output will look like:
-  # -DEF
-  # ABC
-  # -GHI
-  def to_string_debug(self, indentLevel = 0):
-    leftText = self.left.to_string_debug(indentLevel + 1) if self.left else ''
-    rightText = self.right.to_string_debug(indentLevel + 1) if self.right else ''
-    return leftText + ('-'*indentLevel) + self.text + '\n' + rightText
-
   # just prints the stored text
   def to_string(self):
     leftText =  self.left.to_string() if self.left else  ''
@@ -72,22 +59,6 @@ def create_rope_from_map(map):
     rope.left = create_rope_from_map(map['left'])
   if 'right' in map: 
     rope.right = create_rope_from_map(map['right'])
-  return rope
-
-def prepend(rope, text): 
-  if (rope.left):
-    prepend(rope.left, text)
-  else:
-    rope.left = Rope(text)
-  
-  return rope
-
-def append(rope, text): 
-  if (rope.right):
-    append(rope.right, text)
-  else:
-    rope.right = Rope(text)
-  
   return rope
 
 # This is an internal API. You can implement it however you want. 
