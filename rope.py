@@ -1,22 +1,17 @@
 class Rope:
-  def __init__(self, text):
+  # Note: depending on your implementation, you may want to to change this constructor
+  def __init__(self, text, size):
     self.text = text
-    self.size = len(text)
+    self.size = size
     self.left = None
     self.right = None
 
   # just prints the stored text
+  # note that you may want to change this, depending on your implementation  
   def to_string(self):
     leftText =  self.left.to_string() if self.left else  ''
     rightText = self.right.to_string() if self.right else  ''
     return leftText + self.text + rightText
-
-  # How long the text stored is in all of the children combined
-  # This is the same as this.to_string().length
-  def total_size(self):
-    leftText =  self.left.total_size() if self.left else  0
-    rightText = self.right.total_size() if self.right else  0
-    return leftText + len(this.text) + rightText
 
   # how deep the tree is (I.e. the maximum depth of children)
   def depth(self):
@@ -45,7 +40,8 @@ class Rope:
   # Only used for debugging, this has no functional purpose
   def to_dictionary(self):
     mapVersion = {
-      'text': self.text
+      'text': self.text,
+      'size': self.size
     }
     if (self.right):
       mapVersion['right'] = self.right.to_dictionary()
@@ -54,7 +50,7 @@ class Rope:
     return mapVersion
 
 def create_rope_from_map(map): 
-  rope = Rope(map['text'])
+  rope = Rope(map['text'], map['size'])
   if 'left' in map: 
     rope.left = create_rope_from_map(map['left'])
   if 'right' in map: 
