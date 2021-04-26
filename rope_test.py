@@ -1,4 +1,4 @@
-from rope import (Rope, prepend, append, delete_range, insert, 
+from rope import (Rope, delete_range, insert, 
                   create_rope_from_map, rotate_left, rotate_right, rebalance)
 import unittest
 
