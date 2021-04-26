@@ -6,8 +6,6 @@ import unittest
 class Testing(unittest.TestCase):
     def test_rope_basics(self):
         self.assertEqual(Rope('test').to_string(), 'test')
-        self.assertEqual(prepend(Rope('test'), 'abc').to_string(), 'abctest')
-        self.assertEqual(append(Rope('test'), 'abc').to_string(), 'testabc')
         
     def test_deletion(self):
         self.assertEqual(delete_range(Rope('test'), 1, 2).to_string(), 'tst')
