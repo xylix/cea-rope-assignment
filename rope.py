@@ -1,10 +1,17 @@
+# FIXME: Some specifications for a Rope say that _only_ the leaf nodes should contain text, not the upper nodes. Upper nodes should _only_ contain the size, if we are following such a spec
 class Rope:
   # Note: depending on your implementation, you may want to to change this constructor
-  def __init__(self, text, size = None):
+  def __init__(self, text, size = None, left = None, right = None):
     self.text = text
-    self.size = size
-    self.left = None
-    self.right = None
+    if size:
+      self.size = size
+    else:
+      if text:
+        self.size = len(text)
+      if left:
+        self.size = len(left.text)
+    self.left = left
+    self.right = right
 
   # just prints the stored text
   # note that you may want to change this, depending on your implementation  
@@ -60,20 +67,40 @@ def create_rope_from_map(map):
 # This is an internal API. You can implement it however you want. 
 # (E.g. you can choose to mutate the input rope or not)
 def split_at(rope, position):
-  # TODO
-  pass
+  if position <= rope.size:
+    if rope.right:
+      return split_at(rope.right(position - rope.size))
+    else:
+      string = rope.to_string()
+      left = string[:position]
+      right = string[position:]
+      return (Rope(left), Rope(right)) 
+  else:
+    if rope.left:
+      return split_at(rope.left, position)
+    else:
+      string = rope.to_string()
+      left = string[:position]
+      right = string[position:]
+      return (Rope(left), Rope(right))
 
 def delete_range(rope, start, end):
-  # TODO
-  pass
+  left, _ = split_at(rope, start)
+  _, right = split_at(rope, end)
+  return concat(left, right)
 
 def insert(rope, text, location): 
-  # TODO
-  pass
+  left, right = split_at(rope, location)
+  return concat(concat(left, Rope(text)), right)
 
 def rebalance(rope):
   # TODO
   pass
+
+# Concat is useful for implementing other operations
+def concat(left, right):
+  # len + to_string might have bad performance implications
+  return Rope('', None, left, right)
 
 '''
  Rotates a tree: used for rebalancing.
