@@ -94,12 +94,19 @@ def insert(rope, text, location):
   return concat(concat(left, Rope(text)), right)
 
 def rebalance(rope):
-  # TODO
-  pass
+  if rope.is_balanced():
+    return rope
+  else:
+    if not rope.right:
+      return rebalance(rotate_left(rope))
+    if not rope.left:
+      return rebalance(rotate_right(rope))
+    left = rebalance(left)
+    right = rebalance(right)
+    return concat(left, right)
 
 # Concat is useful for implementing other operations
 def concat(left, right):
-  # len + to_string might have bad performance implications
   return Rope('', None, left, right)
 
 '''
